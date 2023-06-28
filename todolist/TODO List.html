@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A==" crossorigin="anonymous"
+    referrerpolicy="no-referrer" />
+  <title>MY TODO LIST</title>
+  <style>
+    body {
+      background: linear-gradient(#69dff4, #cd77ef);
+      background-repeat: no-repeat;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      font-family: sans-serif;
+    }
+
+    section {
+      margin-top: 85px;
+    }
+
+    h1 {
+      text-align: center;
+      color: rgb(16, 2, 64);
+      font-size: 48px;
+      margin-bottom: 58px;
+    }
+
+    .container {
+      margin-left: 80px;
+      width: 500px;
+    }
+
+    .container1 {
+      display: flex;
+      justify-content: center;
+      height: 52px;
+    }
+
+    input,
+    button {
+      border: none;
+      outline: none;
+    }
+
+    .container1 input {
+      padding: 18px, 15px;
+      font-size: 15px;
+      border-top-left-radius: 5px;
+      border-bottom-left-radius: 5px;
+      width: 460px;
+    }
+
+    .container1 button {
+      border-top-right-radius: 5px;
+      border-bottom-right-radius: 5px;
+      cursor: pointer;
+      padding: 0px 10px;
+      font-size: 1rem;
+      color: firebrick;
+      background: white;
+      border-left: 2px solid #eee;
+    }
+
+    .container1 button:hover {
+      color: white;
+      background: black;
+    }
+
+    .todo-container {
+      padding: 0;
+    }
+
+    .todo-container .todo {
+      margin: 0 auto;
+      margin-bottom: 12px;
+      display: flex;
+      justify-content: flex-end;
+      flex-direction: row;
+      background: white;
+      border-radius: 5px;
+    }
+
+    .todo-container .todo.completed {
+      width: 90%;
+      text-decoration: line-through;
+      color: gray;
+      opacity: 0.7;
+    }
+
+    .todo-container button {
+      padding: 20px;
+      flex: 1;
+      margin: 0;
+    }
+
+    .todo-container .todo-check {
+      width: 50px;
+      margin: auto;
+      color: lightgreen;
+      background: white;
+      border-left: 2px solid white;
+      font-size: 1rem;
+    }
+
+    .todo-container .todo-check:hover {
+      color: white;
+      background: lightgreen;
+      cursor: pointer;
+    }
+
+    .todo-container .todo-delete {
+      color: rgb(243, 100, 22);
+      background: white;
+      font-size: 1rem;
+      border-left: 2px solid white;
+      border-top-right-radius: 5px;
+      border-bottom-right-radius: 5px;
+    }
+
+    .todo-container .todo-delete:hover {
+      color: white;
+      background: rgb(240, 153, 54);
+      cursor: pointer;
+    }
+
+    .todo-container .todo li {
+      flex: 10;
+      padding: 16px;
+      list-style-type: none;
+      margin: 0;
+      line-height: 1.6;
+    }
+  </style>
+</head>
+
+<body>
+  <section>
+    <h1>MY TODO LIST</h1>
+    <div class="container">
+      <div class="container1">
+        <input type="text" name="todo" class="todo-input" id="todo-input" placeholder="Enter Your Task....">
+        <button class="btn" id="btn">
+          <i class="fa-solid fa-circle-plus"></i>
+        </button>
+      </div>
+      <ul class="todo-container" id="todo-container"></ul>
+    </div>
+  </section>
+  <script>
+    addbutton = document.getElementById("btn");
+    todocontainer = document.getElementById("todo-container");
+    todoinput = document.getElementById("todo-input");
+    addbutton.addEventListener("click", (e) => {
+      let todo = document.createElement("div");
+      todo.classList.add("todo");
+      let li = document.createElement("li");
+      li.innerText = todoinput.value;
+      todo.appendChild(li);
+      let checkbutton = document.createElement("button");
+      checkbutton.innerHTML = '<i class="fa-solid fa-check"></i>';
+      checkbutton.classList.add("todo-check");
+      todo.appendChild(checkbutton);
+      let deletebutton = document.createElement("button");
+      deletebutton.innerHTML = '<i class="fa-solid fa-circle-minus"></i>';
+      deletebutton.classList.add("todo-delete");
+      todo.appendChild(deletebutton);
+      if (todoinput.value === "") {
+        alert("Enter Your Tasks");
+      } else {
+        todocontainer.appendChild(todo);
+      }
+      todoinput.value = "";
+    });
+    todocontainer.addEventListener("click", (e) => {
+      let target = e.target;
+      if (target.classList.contains("todo-check")) {
+        let item = target.parentElement;
+        item.style.textDecoration = "line-through";
+      }
+      if (target.classList.contains("todo-delete")) {
+        let item = target.parentElement;
+        item.remove();
+      }
+    });
+  </script>
+</body>
+
+</html>
